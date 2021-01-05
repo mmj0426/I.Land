@@ -7,6 +7,8 @@
 
 AGM_ILand::AGM_ILand()
 {
-	DefaultPawnClass = APlayerCharacter::StaticClass();
+	static ConstructorHelpers::FClassFinder<ACharacter> PlayerCharacter(TEXT("/Game/ILand/Characters/Player.Player_C"));
+	DefaultPawnClass = PlayerCharacter.Class;
+
 	PlayerControllerClass = APC_ILand::StaticClass();
 }
