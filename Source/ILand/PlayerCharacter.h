@@ -32,9 +32,11 @@ private :
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = true))
 		UCameraComponent* Camera;
 
-	
 
 	void MoveForward(float NewAxisValue);
 	void MoveRight(float NewAxisValue);
+	void Flight();
+
+	bool isFlying;
 
 };

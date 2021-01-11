@@ -24,6 +24,9 @@ private :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	bool IsInAir;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
+	bool IsFlying;
+
 public : 
 
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;

@@ -7,7 +7,7 @@
 // Sets default values
 APlayerCharacter::APlayerCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	bUseControllerRotationYaw = false;
 
@@ -35,7 +35,7 @@ APlayerCharacter::APlayerCharacter()
 	{
 		GetMesh()->SetSkeletalMesh(SM_Player.Object);
 	}
-	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f,0.0f,-105.0f),FRotator(0.0f, -90.0f, 0.0f));
+	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -105.0f), FRotator(0.0f, -90.0f, 0.0f));
 
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 
@@ -46,13 +46,15 @@ APlayerCharacter::APlayerCharacter()
 		GetMesh()->SetAnimInstanceClass(Anim_Player.Class);
 	}
 
+	isFlying = false;
+
 }
 
 // Called when the game starts or when spawned
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -72,6 +74,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &APlayerCharacter::MoveRight);
 
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Flight"), EInputEvent::IE_Pressed, this, &APlayerCharacter::Flight);
 }
 
 void APlayerCharacter::MoveForward(float NewAxisValue)
@@ -88,4 +91,18 @@ void APlayerCharacter::MoveRight(float NewAxisValue)
 	{
 		AddMovementInput(FRotationMatrix(FRotator(0.0f, GetControlRotation().Yaw, 0.0f)).GetUnitAxis(EAxis::Y), NewAxisValue);
 	}
+}
+
+void APlayerCharacter::Flight()
+{
+	if (isFlying == true)
+	{
+		GetCharacterMovement()->SetMovementMode(MOVE_Flying);
+	}
+	else
+	{
+		GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+	}
+	isFlying = !isFlying;
+
 }

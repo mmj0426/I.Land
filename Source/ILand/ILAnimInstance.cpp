@@ -7,6 +7,7 @@ UILAnimInstance::UILAnimInstance()
 {
 	CurrentPawnSpeed = 0.0f;
 	IsInAir = false;
+	IsFlying = false;
 }
 
 void UILAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
@@ -20,7 +21,8 @@ void UILAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		auto Player = Cast<ACharacter>(Pawn);
 		if (Player)
 		{
-			IsInAir=Player->GetMovementComponent()->IsFalling();
+			IsInAir = Player->GetMovementComponent()->IsFalling();
+			IsFlying = Player->GetMovementComponent()->IsFlying();
 		}
 	}
 }
