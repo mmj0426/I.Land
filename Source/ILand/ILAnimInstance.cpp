@@ -8,6 +8,7 @@ UILAnimInstance::UILAnimInstance()
 	CurrentPawnSpeed = 0.0f;
 	IsInAir = false;
 	IsFlying = false;
+	IsSwimming = false;
 }
 
 void UILAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
@@ -23,6 +24,7 @@ void UILAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		{
 			IsInAir = Player->GetMovementComponent()->IsFalling();
 			IsFlying = Player->GetMovementComponent()->IsFlying();
+			IsSwimming = Player->GetMovementComponent()->IsSwimming();
 		}
 	}
 }
