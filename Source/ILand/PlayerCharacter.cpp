@@ -46,8 +46,8 @@ APlayerCharacter::APlayerCharacter()
 		GetMesh()->SetAnimInstanceClass(Anim_Player.Class);
 	}
 
-	isFlying = false;
-
+	IsFlying = false;
+	TouchCount = 0;
 }
 
 // Called when the game starts or when spawned
@@ -73,7 +73,7 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &APlayerCharacter::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &APlayerCharacter::MoveRight);
 
-	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Touch"), EInputEvent::IE_Pressed, this, &APlayerCharacter::DivideTouch);
 	PlayerInputComponent->BindAction(TEXT("Flight"), EInputEvent::IE_Pressed, this, &APlayerCharacter::Flight);
 }
 
@@ -93,9 +93,14 @@ void APlayerCharacter::MoveRight(float NewAxisValue)
 	}
 }
 
+void APlayerCharacter::Jump()
+{
+	ACharacter::Jump();
+}
+
 void APlayerCharacter::Flight()
 {
-	if (isFlying == true)
+	if (IsFlying == true)
 	{
 		GetCharacterMovement()->SetMovementMode(MOVE_Flying);
 	}
@@ -103,6 +108,6 @@ void APlayerCharacter::Flight()
 	{
 		GetCharacterMovement()->SetMovementMode(MOVE_Walking);
 	}
-	isFlying = !isFlying;
+	IsFlying = !IsFlying;
 
 }

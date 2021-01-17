@@ -26,17 +26,25 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintImplementableEvent, Category = Input)
+	void DivideTouch();
+
+	UFUNCTION(BlueprintCallable)
+	void Flight();
+
 private : 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = true))
-		USpringArmComponent* SpringArm;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = true))
-		UCameraComponent* Camera;
+	USpringArmComponent* SpringArm;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = true))
+	UCameraComponent* Camera;
 
 	void MoveForward(float NewAxisValue);
 	void MoveRight(float NewAxisValue);
-	void Flight();
+	void Jump();
+	
+	bool IsFlying;
 
-	bool isFlying;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = true))
+	int32 TouchCount;
 };
