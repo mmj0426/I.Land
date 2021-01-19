@@ -8,7 +8,7 @@
 
 AGM_ILand::AGM_ILand()
 {
-	static ConstructorHelpers::FClassFinder<ACharacter> PlayerCharacter(TEXT("/Game/ILand/Characters/Player.Player_C"));
+	static ConstructorHelpers::FClassFinder<ACharacter> PlayerCharacter(TEXT("/Game/ILand/Blueprints/Player.Player_C"));
 	DefaultPawnClass = PlayerCharacter.Class;
 
 	PlayerControllerClass = APC_ILand::StaticClass();
@@ -31,9 +31,4 @@ void AGM_ILand::BeginPlay()
 			CreateWidget<UUserWidget>(GetWorld(), TimeWidgetClass)->AddToViewport();
 		}
 	}
-}
-
-void AGM_ILand::StagePlayTime(TSubclassOf<UUserWidget>NewWidgetClass)
-{
-
 }
