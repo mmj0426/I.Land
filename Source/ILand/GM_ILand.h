@@ -6,6 +6,7 @@
 #include "GameFramework/GameMode.h"
 #include "GM_ILand.generated.h"
 
+
 /**
  * 
  */
@@ -16,4 +17,14 @@ class ILAND_API AGM_ILand : public AGameMode
 	
 public : 
 	AGM_ILand();
+
+	UFUNCTION(BlueprintCallable, Category = UI)
+	void StagePlayTime(TSubclassOf<UUserWidget>NewWidgetClass);
+
+protected:
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
+	TSubclassOf<UUserWidget> TimeWidgetClass;
+
 };

@@ -47,4 +47,7 @@ private :
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = true))
 	int32 TouchCount;
+
+protected :
+	FTimerHandle Timer;
 };
