@@ -19,7 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -27,27 +27,24 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Input)
-	void DivideTouch();
+		void DivideTouch();
 
 	UFUNCTION(BlueprintCallable)
-	void Flight();
+		void Flight();
 
-private : 
+private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = true))
-	USpringArmComponent* SpringArm;
+		USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = true))
-	UCameraComponent* Camera;
+		UCameraComponent* Camera;
 
 	void MoveForward(float NewAxisValue);
 	void MoveRight(float NewAxisValue);
 	void Jump();
-	
+
 	bool IsFlying;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = true))
-	int32 TouchCount;
-
-protected :
-	FTimerHandle Timer;
+		int32 TouchCount;
 };
